@@ -10,28 +10,40 @@ const { Option } = Select;
 
 type Todo = {
   Option: string;
+  id: number;
 };
 
 function App() {
   const [todos, setTodos] = useState([]);
   const [todoText, setTodoText] = useState("");
+  const [todoStatus, setTodoStatus] = useState("Not Started");
 
   const handleInputChange = (e: any) => {
     setTodoText(e.target.value);
     console.log(e.target.value);
   };
   const handleClickCreate = () => {
-    if (todoText === "") return;
-    const newTodo = {
-      text: todoText,
-      status: "Not Started",
-    };
+    // if (todoText === "") return;
+    alert(todoText);
+    if (todoText !== "") {
+      setTodos([
+        ...todos,
+        // {
+        // id: todos.length + 1,
+        // text: todoText,
+        // },
+      ]);
+    }
+    // const newTodo = {
+    //   text: todoText,
+    //   status: "Not Started",
+    // };
     // const newTodos = [...todos, todoText];
     // setTodos(newTodos);
-    setTodos([
-      // copy the current values in state
-      ...todos,
-    ]);
+    // setTodos([
+    //   // copy the current values in state
+    //   ...todos,
+    // ]);
     console.log("todos-", todos);
     console.log("todoText=", todoText);
   };
@@ -59,10 +71,13 @@ function App() {
       <ul style={{ width: "50%", margin: "20px auto 0" }}>
         <li style={{ textAlign: "left" }}>
           <Text style={{ marginRight: "10px" }}>Test</Text>
-          <Select style={{ width: "30%", marginRight: "20px" }}>
+          <Select
+            style={{ width: "30%", marginRight: "20px" }}
+            value={todoStatus}
+          >
             <Option value="Not Started">Not Started</Option>
-            <Option value="Not Started">In Progress</Option>
-            <Option value="Not Started">Completed</Option>
+            <Option value="In Progress">In Progress</Option>
+            <Option value="Completed">Completed</Option>
           </Select>
           <Button style={{ marginRight: "10px" }}>Update</Button>
           <Button>Delete</Button>
